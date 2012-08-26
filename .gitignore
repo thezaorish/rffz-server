@@ -1,0 +1,9 @@
+*/target/*
+target/
+*/classes/*
+classes/
+stacktrace.log
+.settings/
+.springBeans
+Thumbs.db
+.svn

@@ -1,0 +1,12 @@
+www.gsp.ro : http://feeds.feedburner.com/GsproFotbal
+www.prosport.ro : http://feeds.feedburner.com/prosport/ifUQ
+www.onlinesport.ro : http://feeds.feedburner.com/onlinesport/eoZs
+www.sport.ro : http://feeds.feedburner.com/sport/qKoJ
+
+www.digisport.ro : http://feeds.feedburner.com/digisport/WAgg
+www.romaniansoccer.ro : http://feeds.feedburner.com/StiriRomaniansoccerro
+www.fanfotbal.org : http://feeds.feedburner.com/fanfotbal/oCCx
+www.fotbal-romania.ro : http://feeds.feedburner.com/fotbal-romania/lzRR
+www.insport.ro : http://feeds.feedburner.com/insport/VJfQ
+www.asport.ro : http://feeds.feedburner.com/StiriSportOnlineDePeAsportro
+www.ofsaid.ro : http://feeds.feedburner.com/Ofsaid
