@@ -32,7 +32,7 @@ public class CandidateTest {
 
 	@Parameters
 	public static Collection<String[]> getTestParameters() {
-		return Arrays.asList(new String[][] { { "Steaua" }, { "steaua" }, { "stelisti" }, { "steliste" }, { "stelei" }, { "steliÅŸti" }, { "stelist" } });
+		return Arrays.asList(new String[][] { { "Steaua" }, { "steaua" }, { "stelisti" }, { "steliste" }, { "stelei" }, { "steliºti" }, { "stelist" } });
 	}
 
 	public CandidateTest(String term) {

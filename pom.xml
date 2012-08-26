@@ -4,14 +4,14 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bunker</groupId>
-	<artifactId>rffz</artifactId>
-	<name>rffz</name>
+	<artifactId>rffz-server</artifactId>
+	<name>rffz-server</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+		<org.springframework.version>3.1.2.RELEASE</org.springframework.version>
 		<org.hibernate.version>3.5.6-Final</org.hibernate.version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 	</properties>
@@ -124,12 +124,6 @@
 			</exclusions>
 		</dependency>
 		
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>r05</version>
-		</dependency>
-		
 	    <!-- json, xml -->
 	    <dependency> <!-- http://mvnrepository.com/artifact/javax.xml.stream/stax-api/1.0-2 -->
 		<groupId>javax.xml.stream</groupId>
@@ -211,6 +205,7 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- Various -->
 		<dependency>
 		    <groupId>commons-lang</groupId>
 		    <artifactId>commons-lang</artifactId>
@@ -219,7 +214,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>10.0.1</version>
+			<version>13.0</version>
 		</dependency>
 	</dependencies>
 	
