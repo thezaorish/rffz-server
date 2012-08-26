@@ -34,7 +34,7 @@ public class Candidate implements Serializable {
 	private static final String IMG_REGEX = "<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>";
 	private static final String A_REGEX = "<a[^>]+href\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>*>";
 
-	private static final Set<String> STEAUA_DICTIONARY = Sets.newHashSet("steaua", "stelei", "stelist", "steli∫ti");
+	private static final Set<String> STEAUA_DICTIONARY = Sets.newHashSet("steaua", "stelei", "stelist", "steli≈üti");
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
