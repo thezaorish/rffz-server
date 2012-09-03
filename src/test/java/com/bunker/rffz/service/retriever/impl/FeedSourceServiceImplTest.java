@@ -2,7 +2,6 @@ package com.bunker.rffz.service.retriever.impl;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,24 +10,28 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.bunker.rffz.dao.retriever.FeedSourceDao;
+import com.bunker.rffz.config.PersistenceContextConfig;
 import com.bunker.rffz.domain.retriever.FeedSource;
+import com.bunker.rffz.repository.retriever.FeedSourceRepository;
 import com.bunker.rffz.service.retriever.FeedSourceService;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { PersistenceContextConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class FeedSourceServiceImplTest {
 
 	private FeedSourceService feedSourceService;
 
-	@Mock
-	private FeedSourceDao feedSourceDao;
+	@Autowired
+	private FeedSourceRepository feedSourceRepository;
 
 	@Before
 	public void setUp() {
-		feedSourceService = new FeedSourceServiceImpl(feedSourceDao);
+		feedSourceService = new FeedSourceServiceImpl(feedSourceRepository);
 	}
 
 	@Test
@@ -36,7 +39,7 @@ public class FeedSourceServiceImplTest {
 		// given
 		FeedSource feedSource = new FeedSource("name", "url");
 		List<FeedSource> feedSources = new ArrayList<FeedSource>(Arrays.asList(feedSource));
-		given(feedSourceDao.getAllFeedSources()).willReturn(feedSources);
+		feedSourceRepository.save(feedSources);
 
 		// when
 		List<FeedSource> expectedFeedSources = feedSourceService.getAllFeedSources();

@@ -14,9 +14,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bunker.rffz.dao.ScheduledTaskDao;
 import com.bunker.rffz.domain.ScheduledTask;
 import com.bunker.rffz.domain.ScheduledTask.Name;
+import com.bunker.rffz.repository.ScheduledTaskRespository;
+import com.bunker.rffz.repository.ScheduledTaskSpecifications;
 import com.bunker.rffz.service.job.ScheduledTaskService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,20 +26,21 @@ public class ScheduledTaskServiceImplTest {
 	private ScheduledTaskService scheduledTaskService;
 
 	@Mock
-	private ScheduledTaskDao scheduledTaskDao;
+	private ScheduledTaskRespository scheduledTaskRespository;
 
 	private Name name;
 
 	@Before
 	public void setUp() {
-		scheduledTaskService = new ScheduledTaskServiceImpl(scheduledTaskDao);
+		scheduledTaskService = new ScheduledTaskServiceImpl(scheduledTaskRespository);
 		name = Name.CandidatesRetrievalJob;
 	}
 	
 	@Test
 	public void shouldFindTaskActive() {
 		// given the job is active
-		given(scheduledTaskDao.isActive(name)).willReturn(true);
+		ScheduledTask task = new ScheduledTask(name, true);
+		given(scheduledTaskRespository.findOne(ScheduledTaskSpecifications.getByName(name))).willReturn(task);
 
 		// when
 		boolean active = scheduledTaskService.isActive(name);
@@ -49,7 +51,8 @@ public class ScheduledTaskServiceImplTest {
 	@Test
 	public void shouldFindTaskDisabled() {
 		// given the job is NOT active
-		given(scheduledTaskDao.isActive(name)).willReturn(false);
+		ScheduledTask task = new ScheduledTask(name, false);
+		given(scheduledTaskRespository.findOne(ScheduledTaskSpecifications.getByName(name))).willReturn(task);
 
 		// when
 		boolean active = scheduledTaskService.isActive(name);
@@ -64,7 +67,7 @@ public class ScheduledTaskServiceImplTest {
 		ScheduledTask task = new ScheduledTask(name, true);
 		Date lastRun = new Date(1000);
 		task.setLastRun(lastRun);
-		given(scheduledTaskDao.getByName(name)).willReturn(task);
+		given(scheduledTaskRespository.findOne(ScheduledTaskSpecifications.getByName(name))).willReturn(task);
 
 		// when
 		Date retrievedLastRun = scheduledTaskService.getLastRun(name);
@@ -75,7 +78,7 @@ public class ScheduledTaskServiceImplTest {
 	@Test
 	public void shouldGetLastRunWhenNoExistingTask() {
 		// given an existing task
-		given(scheduledTaskDao.getByName(name)).willReturn(null);
+		given(scheduledTaskRespository.findOne(ScheduledTaskSpecifications.getByName(name))).willReturn(null);
 
 		// when
 		Date retrievedLastRun = scheduledTaskService.getLastRun(name);
@@ -90,14 +93,14 @@ public class ScheduledTaskServiceImplTest {
 		ScheduledTask task = new ScheduledTask(name, true);
 		Date lastRun = new Date(1000);
 		task.setLastRun(lastRun);
-		given(scheduledTaskDao.getByName(name)).willReturn(task);
+		given(scheduledTaskRespository.findOne(ScheduledTaskSpecifications.getByName(name))).willReturn(task);
 
 		// when
 		scheduledTaskService.updateLastRun(name);
 
 		// then
 		assertThat(task.getLastRun().after(lastRun), is(true));
-		verify(scheduledTaskDao).save(task);
+		verify(scheduledTaskRespository).save(task);
 	}
 
 }

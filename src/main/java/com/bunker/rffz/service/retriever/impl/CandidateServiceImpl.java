@@ -6,40 +6,41 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bunker.rffz.dao.retriever.CandidateDao;
 import com.bunker.rffz.domain.retriever.Candidate;
+import com.bunker.rffz.repository.retriever.CandidateRepository;
+import com.bunker.rffz.repository.retriever.CandidateSpecifications;
 import com.bunker.rffz.service.retriever.CandidateService;
 
 @Service("candidateService")
 public class CandidateServiceImpl implements CandidateService {
-
+	
 	private static final Logger logger = Logger.getLogger(CandidateServiceImpl.class);
 
-	private CandidateDao candidateDao;
-
+	private CandidateRepository candidateRepository;
+	
 	@Autowired
-	public CandidateServiceImpl(CandidateDao candidateDao) {
-		this.candidateDao = candidateDao;
+	public CandidateServiceImpl(CandidateRepository candidateRepository) {
+		this.candidateRepository = candidateRepository;
 	}
-
+	
 	@Override
 	public void createCandidate(Candidate candidate) {
-		int count = candidateDao.countCandidates(candidate.getTitle(), candidate.getFeedSource());
+		Long count =  candidateRepository.count(CandidateSpecifications.countByTitleAndFeedSource(candidate.getTitle(), candidate.getFeedSource()));
 		if (count == 0) {
-			candidateDao.save(candidate);
+			candidateRepository.save(candidate);
 			logger.info("createCandidate with id: " + candidate.getId());
 		}
 	}
 
 	@Override
 	public List<Candidate> getUnprocessedCandidates() {
-		List<Candidate> candidates = candidateDao.getUnprocessedCandidates();
+		List<Candidate> candidates = candidateRepository.findAll(CandidateSpecifications.getUnprocessedCandidates());
 		return candidates;
 	}
 
 	@Override
 	public void updateCandidate(Candidate candidate) {
-		candidateDao.save(candidate);
+		candidateRepository.save(candidate);
 	}
 
 }

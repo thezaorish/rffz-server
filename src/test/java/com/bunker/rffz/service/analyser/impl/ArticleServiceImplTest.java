@@ -17,24 +17,27 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
-import com.bunker.rffz.dao.analyser.ArticleDao;
 import com.bunker.rffz.domain.analyser.Article;
 import com.bunker.rffz.domain.retriever.Candidate;
 import com.bunker.rffz.domain.retriever.FeedSource;
+import com.bunker.rffz.repository.analyser.ArticleRepository;
 import com.bunker.rffz.service.analyser.ArticleService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ArticleServiceImplTest {
 
 	@Mock
-	private ArticleDao articleDao;
+	private ArticleRepository articleRepository;
 
 	private ArticleService articleService;
 
 	@Before
 	public void setUp() {
-		articleService = new ArticleServiceImpl(articleDao);
+		articleService = new ArticleServiceImpl(articleRepository);
 	}
 
 	@Test
@@ -47,7 +50,7 @@ public class ArticleServiceImplTest {
 		articleService.createArticle(candidate);
 
 		// then
-		verify(articleDao).save(Matchers.argThat(new ArticleMatcher(candidate)));
+		verify(articleRepository).save(Matchers.argThat(new ArticleMatcher(candidate)));
 	}
 
 	class ArticleMatcher extends ArgumentMatcher<Article> {
@@ -84,38 +87,11 @@ public class ArticleServiceImplTest {
 		int size = 5;
 
 		List<Article> articles = new ArrayList<Article>(Arrays.asList(getTestArticle()));
-		given(articleDao.getArticles(page, size)).willReturn(articles);
+		Page<Article> articleInPage = new PageImpl<Article>(articles);
+		given(articleRepository.findAll(new PageRequest(page, size))).willReturn(articleInPage);
 
 		// when
 		List<Article> retrievedArticles = articleService.getArticles(page, size);
-
-		// then
-		assertThat(retrievedArticles, is(articles));
-	}
-
-	@Test
-	public void shouldGetArticlesNewerThan() {
-		// given
-		Date date = new Date();
-
-		List<Article> articles = new ArrayList<Article>(Arrays.asList(getTestArticle()));
-		given(articleDao.getArticlesNewerThan(date)).willReturn(articles);
-
-		// when
-		List<Article> retrievedArticles = articleService.getArticlesNewerThan(date);
-
-		// then
-		assertThat(retrievedArticles, is(articles));
-	}
-
-	@Test
-	public void shouldGetArticlesWithMaxCreatinDate() {
-		// given
-		List<Article> articles = new ArrayList<Article>(Arrays.asList(getTestArticle()));
-		given(articleDao.getArticlesWithMaxCreationDate()).willReturn(articles);
-
-		// when
-		List<Article> retrievedArticles = articleService.getArticlesWithMaxCreationDate();
 
 		// then
 		assertThat(retrievedArticles, is(articles));

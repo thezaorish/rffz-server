@@ -19,7 +19,7 @@ public class ScheduledTask implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	@Column(nullable = false, unique = true)
 	@Enumerated(EnumType.STRING)

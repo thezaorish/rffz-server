@@ -2,96 +2,65 @@ package com.bunker.rffz.service.retriever.impl;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.bunker.rffz.dao.retriever.CandidateDao;
+import com.bunker.rffz.config.PersistenceContextConfig;
 import com.bunker.rffz.domain.retriever.Candidate;
 import com.bunker.rffz.domain.retriever.FeedSource;
-import com.bunker.rffz.service.retriever.CandidateService;
+import com.bunker.rffz.repository.retriever.CandidateRepository;
+import com.bunker.rffz.repository.retriever.FeedSourceRepository;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { PersistenceContextConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class CandidateServiceImplTest {
-
-	private CandidateService candidateService;
-
-	@Mock
-	private CandidateDao candidateDao;
-
+	
+	@Autowired
+	private CandidateServiceImpl candidateService;
+	
+	@Autowired
+	private CandidateRepository candidateRepository;
+	
+	@Autowired
+	private FeedSourceRepository feedSourceRepository;
+	
+	private Candidate candidate;
+	private FeedSource feedSource;
+	
 	@Before
 	public void setUp() {
-		candidateService = new CandidateServiceImpl(candidateDao);
+		feedSource = new FeedSource("name", "url");
+		feedSource.setActive(true);
+		feedSourceRepository.save(feedSource);
+
+		candidate = new Candidate("title", "description", new Date(), "link", feedSource);
 	}
-
+	
 	@Test
-	public void shouldSaveCandidate() {
-		// given a candidate
-		Candidate candidate = new Candidate();
+	public void shouldGetAllUnprocessedCandidates() {
+		// given an unprocessed candidate
+		candidateRepository.save(candidate);
 
-		// when
-		candidateService.updateCandidate(candidate);
-
-		// then
-		verify(candidateDao).save(candidate);
-	}
-
-	@Test
-	public void shouldGetUnprocessedCandidates() {
-		// given
-		Candidate candidate = new Candidate();
-		List<Candidate> candidates = new ArrayList<Candidate>(Arrays.asList(candidate));
-		given(candidateDao.getUnprocessedCandidates()).willReturn(candidates);
+		// and a processed candidate
+		Candidate processedCandidate = new Candidate("newtitle", "description", new Date(), "link", feedSource);
+		processedCandidate.setProcessed(true);
+		candidateRepository.save(processedCandidate);
 
 		// when
 		List<Candidate> returnedCandidates = candidateService.getUnprocessedCandidates();
 
-		// then
-		assertThat(returnedCandidates, is(candidates));
-		verify(candidateDao).getUnprocessedCandidates();
-	}
-
-	@Test
-	public void shouldCreateCandidate() {
-		// given a new candidate
-		FeedSource feedSource = new FeedSource("feedName", "feedUrl");
-		Candidate candidate = new Candidate("title", "description", new Date(10), "link", feedSource);
-
-		// NOT equal to any existing candidates
-		given(candidateDao.countCandidates(candidate.getTitle(), feedSource)).willReturn(0);
-
-		// when we try to create it
-		candidateService.createCandidate(candidate);
-
-		// then it should be saved
-		verify(candidateDao).save(candidate);
-	}
-	@Test
-	public void shouldNotCreateDuplicateCandidate() {
-		// given a new candidate
-		FeedSource feedSource = new FeedSource("feedName", "feedUrl");
-		Candidate candidate = new Candidate("title", "description", new Date(10), "link", feedSource);
-
-		// but equal to an existing candidate
-		given(candidateDao.countCandidates(candidate.getTitle(), feedSource)).willReturn(1);
-
-		// when we try to create it
-		candidateService.createCandidate(candidate);
-
-		// then it should NOT be saved
-		verify(candidateDao, never()).save(any(Candidate.class));
+		// then the returned candidate should be only the unprocessed one
+		assertThat(returnedCandidates.size(), is(1));
+		assertThat(returnedCandidates.get(0).getId(), is(candidate.getId())); // NOTE until the timestamp issue is fixed
 	}
 
 }

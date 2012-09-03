@@ -6,7 +6,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,23 +44,6 @@ public class FeedItemControllerTest {
 
 		// then
 		verify(feedItemService).getFeedItemList(page, size);
-		assertThat(returned, is(feedItemList));
-	}
-
-	@Test
-	public void shouldGetNewestFeedItems() {
-		// given some feed items
-		FeedItemList feedItemList = new FeedItemList(new ArrayList<FeedItem>());
-		// newer than the reference date
-		Date lastSyncDate = new Date();
-
-		given(feedItemService.getFeedItemListNewerThan(lastSyncDate)).willReturn(feedItemList);
-
-		// when
-		FeedItemList returned = controller.getNewestFeeds(lastSyncDate);
-
-		// then
-		verify(feedItemService).getFeedItemListNewerThan(lastSyncDate);
 		assertThat(returned, is(feedItemList));
 	}
 

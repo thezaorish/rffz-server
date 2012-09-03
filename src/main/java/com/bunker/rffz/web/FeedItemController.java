@@ -8,7 +8,6 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,13 +37,6 @@ public class FeedItemController {
 	@ResponseBody
 	public FeedItemList getPaginatedFeeds(@RequestParam("page") int page, @RequestParam("size") int size) {
 		FeedItemList items = feedItemService.getFeedItemList(page, size);
-		return items;
-	}
-
-	@RequestMapping(value = "/steaua/{date}", method = RequestMethod.GET)
-	@ResponseBody
-	public FeedItemList getNewestFeeds(@PathVariable("date") Date lastSyncDate) {
-		FeedItemList items = feedItemService.getFeedItemListNewerThan(lastSyncDate);
 		return items;
 	}
 
