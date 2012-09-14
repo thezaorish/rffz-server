@@ -52,6 +52,7 @@ public class FeedItemList {
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "FeedItemList [feedItems=" + feedItems + "]";

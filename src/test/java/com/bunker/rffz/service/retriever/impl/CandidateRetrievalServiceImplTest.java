@@ -1,8 +1,6 @@
 package com.bunker.rffz.service.retriever.impl;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
@@ -62,9 +60,6 @@ public class CandidateRetrievalServiceImplTest {
 		List<SyndEntryImpl> syndEntries = new ArrayList<SyndEntryImpl>(Arrays.asList(syndEntry));
 		given(feedEntryHelper.getFeedEntries(feedSource.getUrl())).willReturn(syndEntries);
 
-		// and the date for last successful retrieval operation is in the past
-		given(scheduledTaskService.getLastRun(ScheduledTask.Name.CandidatesRetrievalJob)).willReturn(new Date(10));
-
 		// when
 		candidateRetrievalService.generateCandidates();
 
@@ -84,9 +79,6 @@ public class CandidateRetrievalServiceImplTest {
 		SyndEntryImpl syndEntry = getSyndEntry(false, false);
 		List<SyndEntryImpl> syndEntries = new ArrayList<SyndEntryImpl>(Arrays.asList(syndEntry));
 		given(feedEntryHelper.getFeedEntries(feedSource.getUrl())).willReturn(syndEntries);
-
-		// and the date for last successful retrieval operation is in the past
-		given(scheduledTaskService.getLastRun(ScheduledTask.Name.CandidatesRetrievalJob)).willReturn(new Date(10));
 
 		// when
 		candidateRetrievalService.generateCandidates();
@@ -109,9 +101,6 @@ public class CandidateRetrievalServiceImplTest {
 		List<SyndEntryImpl> syndEntries = new ArrayList<SyndEntryImpl>(Arrays.asList(syndEntry));
 		given(feedEntryHelper.getFeedEntries(feedSource.getUrl())).willReturn(syndEntries);
 
-		// and the date for last successful retrieval operation is in the past
-		given(scheduledTaskService.getLastRun(ScheduledTask.Name.CandidatesRetrievalJob)).willReturn(new Date(10));
-
 		// when
 		candidateRetrievalService.generateCandidates();
 
@@ -132,14 +121,11 @@ public class CandidateRetrievalServiceImplTest {
 		List<SyndEntryImpl> syndEntries = new ArrayList<SyndEntryImpl>(Arrays.asList(syndEntry));
 		given(feedEntryHelper.getFeedEntries(feedSource.getUrl())).willReturn(syndEntries);
 
-		// and the date for last successful retrieval operation is newer than syndEntry publishedDate
-		given(scheduledTaskService.getLastRun(ScheduledTask.Name.CandidatesRetrievalJob)).willReturn(new Date());
-
 		// when
 		candidateRetrievalService.generateCandidates();
 
-		// then no new candidate is saved
-		verify(candidateService, never()).createCandidate(any(Candidate.class));
+		// then a consistent candidate for every valid syndEntry is saved
+		verify(candidateService).createCandidate(Matchers.argThat(new CandidateMatcher(syndEntry, feedSource)));
 		// and date for last successful retrieval operation is updated
 		verify(scheduledTaskService).updateLastRun(ScheduledTask.Name.CandidatesRetrievalJob);
 	}
@@ -155,38 +141,11 @@ public class CandidateRetrievalServiceImplTest {
 		List<SyndEntryImpl> syndEntries = new ArrayList<SyndEntryImpl>(Arrays.asList(syndEntry));
 		given(feedEntryHelper.getFeedEntries(feedSource.getUrl())).willReturn(syndEntries);
 
-		// and the date for last successful retrieval operation is newer than syndEntry publishedDate
-		given(scheduledTaskService.getLastRun(ScheduledTask.Name.CandidatesRetrievalJob)).willReturn(new Date());
-
 		// when
 		candidateRetrievalService.generateCandidates();
 
-		// then no new candidate is saved
-		verify(candidateService, never()).createCandidate(any(Candidate.class));
-		// and date for last successful retrieval operation is updated
-		verify(scheduledTaskService).updateLastRun(ScheduledTask.Name.CandidatesRetrievalJob);
-	}
-	@Test
-	public void shouldGenerateCandidateFromFeedWithoutImageAndComplexDescription2() {
-		// given a valid feedSource
-		FeedSource feedSource = new FeedSource("name", "url");
-		List<FeedSource> feedSources = new ArrayList<FeedSource>(Arrays.asList(feedSource));
-		given(feedSourceService.getAllFeedSources()).willReturn(feedSources);
-
-		// and feed entries for the feedSource
-		SyndEntryImpl syndEntry = getSyndEntry(true, true);
-		syndEntry.setEnclosures(null);
-		List<SyndEntryImpl> syndEntries = new ArrayList<SyndEntryImpl>(Arrays.asList(syndEntry));
-		given(feedEntryHelper.getFeedEntries(feedSource.getUrl())).willReturn(syndEntries);
-
-		// and the date for last successful retrieval operation is newer than syndEntry publishedDate
-		given(scheduledTaskService.getLastRun(ScheduledTask.Name.CandidatesRetrievalJob)).willReturn(new Date());
-
-		// when
-		candidateRetrievalService.generateCandidates();
-
-		// then no new candidate is saved
-		verify(candidateService, never()).createCandidate(any(Candidate.class));
+		// then a consistent candidate for every valid syndEntry is saved
+		verify(candidateService).createCandidate(Matchers.argThat(new CandidateMatcher(syndEntry, feedSource)));
 		// and date for last successful retrieval operation is updated
 		verify(scheduledTaskService).updateLastRun(ScheduledTask.Name.CandidatesRetrievalJob);
 	}

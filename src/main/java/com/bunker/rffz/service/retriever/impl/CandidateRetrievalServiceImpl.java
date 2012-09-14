@@ -60,10 +60,6 @@ public class CandidateRetrievalServiceImpl implements CandidateRetrievalService 
 		scheduledTaskService.updateLastRun(Name.CandidatesRetrievalJob);
 	}
 	private void createCandidate(SyndEntryImpl element, FeedSource feedSource, Date lastRetrievalDate) {
-		if (element.getPublishedDate().before(lastRetrievalDate)) {
-			return;
-		}
-
 		Candidate candidate = new Candidate(element.getTitle(), element.getDescription().getValue(), element.getPublishedDate(), element.getLink(), feedSource);
 		candidate.extractImagePath();
 		candidate.cleanUpAnchor();
