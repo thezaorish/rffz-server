@@ -1,7 +1,6 @@
 package com.bunker.rffz.service.publisher.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +27,6 @@ public class FeedItemServiceImpl implements FeedItemService {
 	@Override
 	public FeedItemList getFeedItemList(int page, int size) {
 		List<Article> articles = articleService.getArticles(page, size);
-		return generateFeedItems(articles);
-	}
-
-	@Override
-	public FeedItemList getFeedItemListNewerThan(Date lastSyncDate) {
-		List<Article> articles = articleService.getArticlesNewerThan(lastSyncDate);
-		return generateFeedItems(articles);
-	}
-
-	@Override
-	public FeedItemList getArticlesWithMaxCreationDate() {
-		List<Article> articles = articleService.getArticlesWithMaxCreationDate();
 		return generateFeedItems(articles);
 	}
 

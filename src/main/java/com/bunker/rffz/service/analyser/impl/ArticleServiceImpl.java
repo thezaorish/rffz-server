@@ -1,6 +1,5 @@
 package com.bunker.rffz.service.analyser.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -34,18 +33,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article> getArticles(int page, int size) {
 		List<Article> articles = articleDao.getArticles(page, size);
-		return articles;
-	}
-
-	@Override
-	public List<Article> getArticlesNewerThan(Date date) {
-		List<Article> articles = articleDao.getArticlesNewerThan(date);
-		return articles;
-	}
-
-	@Override
-	public List<Article> getArticlesWithMaxCreationDate() {
-		List<Article> articles = articleDao.getArticlesWithMaxCreationDate();
 		return articles;
 	}
 

@@ -56,38 +56,6 @@ public class FeedItemServiceImplTest {
 		assertThat(new FeedItemListMatcher(articles).matches(result), is(true));
 	}
 
-	@Test
-	public void shouldGetNewestFeedItems() {
-		// given some existing articles
-		List<Article> articles = new ArrayList<Article>(Arrays.asList(getTestArticle()));
-
-		// and a reference date
-		Date reference = new Date();
-		given(articleService.getArticlesNewerThan(reference)).willReturn(articles);
-
-		// when
-		FeedItemList result = feedItemService.getFeedItemListNewerThan(reference);
-
-		// then
-		verify(articleService).getArticlesNewerThan(reference);
-		assertThat(new FeedItemListMatcher(articles).matches(result), is(true));
-	}
-
-	@Test
-	public void shouldGetArticlsWithMaxCreationDate() {
-		// given some existing articles
-		List<Article> articles = new ArrayList<Article>(Arrays.asList(getTestArticle()));
-
-		given(articleService.getArticlesWithMaxCreationDate()).willReturn(articles);
-
-		// when
-		FeedItemList result = feedItemService.getArticlesWithMaxCreationDate();
-
-		// then
-		verify(articleService).getArticlesWithMaxCreationDate();
-		assertThat(new FeedItemListMatcher(articles).matches(result), is(true));
-	}
-
 	private Article getTestArticle() {
 		FeedSource feedSource = new FeedSource("name", "url");
 		Candidate candidate = new Candidate("name", "description", new Date(1000), "www.link.com", feedSource);

@@ -93,34 +93,6 @@ public class ArticleServiceImplTest {
 		assertThat(retrievedArticles, is(articles));
 	}
 
-	@Test
-	public void shouldGetArticlesNewerThan() {
-		// given
-		Date date = new Date();
-
-		List<Article> articles = new ArrayList<Article>(Arrays.asList(getTestArticle()));
-		given(articleDao.getArticlesNewerThan(date)).willReturn(articles);
-
-		// when
-		List<Article> retrievedArticles = articleService.getArticlesNewerThan(date);
-
-		// then
-		assertThat(retrievedArticles, is(articles));
-	}
-
-	@Test
-	public void shouldGetArticlesWithMaxCreatinDate() {
-		// given
-		List<Article> articles = new ArrayList<Article>(Arrays.asList(getTestArticle()));
-		given(articleDao.getArticlesWithMaxCreationDate()).willReturn(articles);
-
-		// when
-		List<Article> retrievedArticles = articleService.getArticlesWithMaxCreationDate();
-
-		// then
-		assertThat(retrievedArticles, is(articles));
-	}
-
 	private Article getTestArticle() {
 		FeedSource feedSource = new FeedSource("name", "url");
 		Candidate candidate = new Candidate("name", "description", new Date(1000), "www.link.com", feedSource);
