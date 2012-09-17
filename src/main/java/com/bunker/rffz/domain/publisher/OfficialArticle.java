@@ -28,7 +28,7 @@ public class OfficialArticle {
 	private long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date", nullable = false)
+	@Column(name = "created_date", nullable = false)
 	@XmlElement
 	private Date creationDate;
 
