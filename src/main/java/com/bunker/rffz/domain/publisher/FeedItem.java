@@ -119,6 +119,7 @@ public class FeedItem {
 			&& Objects.equal(url, other.url)
 			&& Objects.equal(source, other.source);
 	}
+	
 	@Override
 	public String toString() {
 		return "FeedItem [title=" + title + ", description=" + description + ", imagePath=" + imagePath + ", publishDate=" + publishDate + ", creationDate=" + creationDate + ", url=" + url + ", source=" + source + "]";

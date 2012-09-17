@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -137,65 +136,6 @@ public class HibernateArticleDaoTest {
 
 		// then
 		assertThat(articles, is(Arrays.asList(article1)));
-	}
-
-	@Test
-	public void shouldGetArticleNewerThanSpecifiedDate() {
-		// given an article just created
-		articleDao.save(article);
-
-		// and an article created 2 months ago
-		Article articleCreatedTwoMonthsAgo = new Article(candidate);
-		articleCreatedTwoMonthsAgo.setCreationDate(getDateXMonthsAgo(2));
-		articleDao.save(articleCreatedTwoMonthsAgo);
-
-		// and an article created 1 month ago
-		Date oneMonthAgo = getDateXMonthsAgo(1);
-
-		Article articleCreatedOneMonthAgo = new Article(candidate);
-		articleCreatedOneMonthAgo.setCreationDate(oneMonthAgo);
-		articleDao.save(articleCreatedOneMonthAgo);
-
-		// when we retrieve the articles newer than 1 month
-		List<Article> articlesNewerThanOneMonth = articleDao.getArticlesNewerThan(oneMonthAgo);
-
-		// then
-		assertThat(articlesNewerThanOneMonth.size(), is(2));
-		assertThat(articlesNewerThanOneMonth.get(0), is(article));
-		assertThat(articlesNewerThanOneMonth.get(1), is(articleCreatedOneMonthAgo));
-	}
-
-	@Test
-	public void shouldGetArticlesWithMaxDate() {
-		// given an article created 1 month
-		Date oneMonthAgo = getDateXMonthsAgo(1);
-
-		article.setCreationDate(oneMonthAgo);
-		articleDao.save(article);
-
-		// and an article created 2 months ago
-		Article articleCreatedTwoMonthsAgo = new Article(candidate);
-		articleCreatedTwoMonthsAgo.setCreationDate(getDateXMonthsAgo(2));
-		articleDao.save(articleCreatedTwoMonthsAgo);
-
-		// and an article created 1 month ago
-		Article articleCreatedOneMonthAgo = new Article(candidate);
-		articleCreatedOneMonthAgo.setCreationDate(oneMonthAgo);
-		articleDao.save(articleCreatedOneMonthAgo);
-
-		// when we retrieve the articles newer than 1 month
-		List<Article> articlesWithMaxCreationDate = articleDao.getArticlesWithMaxCreationDate();
-
-		// then
-		assertThat(articlesWithMaxCreationDate.size(), is(2));
-		assertThat(articlesWithMaxCreationDate.get(0), is(article));
-		assertThat(articlesWithMaxCreationDate.get(1), is(articleCreatedOneMonthAgo));
-	}
-
-	private Date getDateXMonthsAgo(int numberOfMonths) {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MONTH, -numberOfMonths);
-		return cal.getTime();
 	}
 
 }

@@ -12,28 +12,28 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bunker.rffz.domain.publisher.FeedItemList;
-import com.bunker.rffz.service.publisher.FeedItemService;
+import com.bunker.rffz.domain.publisher.OfficialArticleList;
+import com.bunker.rffz.service.publisher.OfficialArticleService;
 import com.jayway.restassured.specification.RequestSpecification;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/integrationTest-context.xml")
 @Transactional
-public class FeedItemControllerIT {
+public class OfficialArticleControllerIT {
 
 	private static final String MIME_JSON = "application/json";
 	private static final String MIME_XML = "application/xml";
 	private static final String MIME_ATOM = "application/atom+xml";
-
-	private static final String REST_ALL_ARTICLES_URL = "http://localhost:8484/feed/steaua";
+	
+	private static final String REST_ALL_ARTICLES_URL = "http://localhost:8080/official/steaua";
 
 	@Autowired
-	private FeedItemService feedItemService;
-
+	private OfficialArticleService officialArticleService;
+	
 	@Test
-	public void shouldGetFeedItemsPaginatedAsXml() {
+	public void shouldGetOfficialArticlesPaginatedAsXml() {
 		// given
-		FeedItemList feedItems = feedItemService.getFeedItemList(1, 5);
+		OfficialArticleList officialArticleList = officialArticleService.getOfficialArticlesList(1, 5);
 
 		String restUrl = REST_ALL_ARTICLES_URL + "?page=1&size=5";
 
@@ -41,16 +41,16 @@ public class FeedItemControllerIT {
 		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_XML);
 
 		int statusCode = requestSpecification.get(restUrl).getStatusCode();
-		FeedItemList retrievedFeedItemList = requestSpecification.get(restUrl).as(FeedItemList.class);
+		OfficialArticleList retrievedOfficialArticleList = requestSpecification.get(restUrl).as(OfficialArticleList.class);
 
 		// then
 		assertThat(statusCode, is(200));
-		assertThat(retrievedFeedItemList, is(feedItems));
+		assertThat(retrievedOfficialArticleList, is(officialArticleList));
 	}
 	@Test
-	public void shouldGetFeedItemsPaginatedAsJson() {
+	public void shouldGetOfficialArticlesPaginatedAsJson() {
 		// given
-		FeedItemList feedItems = feedItemService.getFeedItemList(3, 1);
+		OfficialArticleList officialArticleList = officialArticleService.getOfficialArticlesList(3, 1);
 
 		String restUrl = REST_ALL_ARTICLES_URL + "?page=3&size=1";
 
@@ -58,16 +58,16 @@ public class FeedItemControllerIT {
 		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_JSON);
 
 		int statusCode = requestSpecification.get(restUrl).getStatusCode();
-		FeedItemList retrievedFeedItemList = requestSpecification.get(restUrl).as(FeedItemList.class);
+		OfficialArticleList retrievedOfficialArticleList = requestSpecification.get(restUrl).as(OfficialArticleList.class);
 
 		// then
 		assertThat(statusCode, is(200));
-		assertThat(retrievedFeedItemList, is(feedItems));
+		assertThat(retrievedOfficialArticleList, is(officialArticleList));
 	}
 	@Test
-	public void shouldGetFeedItemsPaginatedAsAtom() {
+	public void shouldGetOfficialArticlesPaginatedAsAtom() {
 		// given
-		FeedItemList feedItems = feedItemService.getFeedItemList(2, 2);
+		OfficialArticleList officialArticleList = officialArticleService.getOfficialArticlesList(2, 2);
 
 		String restUrl = REST_ALL_ARTICLES_URL + "?page=2&size=2";
 
@@ -75,11 +75,11 @@ public class FeedItemControllerIT {
 		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_ATOM);
 
 		int statusCode = requestSpecification.get(restUrl).getStatusCode();
-		FeedItemList retrievedFeedItemList = requestSpecification.get(restUrl).as(FeedItemList.class);
+		OfficialArticleList retrievedOfficialArticleList = requestSpecification.get(restUrl).as(OfficialArticleList.class);
 
 		// then
 		assertThat(statusCode, is(200));
-		assertThat(retrievedFeedItemList, is(feedItems));
+		assertThat(retrievedOfficialArticleList, is(officialArticleList));
 	}
-
+	
 }
