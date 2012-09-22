@@ -11,7 +11,7 @@ import com.bunker.rffz.domain.util.ScheduledTask.Name;
 import com.bunker.rffz.service.feedarticle.ArticleService;
 import com.bunker.rffz.service.feedarticle.CandidateAnalyserService;
 import com.bunker.rffz.service.feedarticle.CandidateService;
-import com.bunker.rffz.service.job.ScheduledTaskService;
+import com.bunker.rffz.service.util.ScheduledTaskService;
 
 @Service("candidateAnalyserService")
 public class CandidateAnalyserServiceImpl implements CandidateAnalyserService {

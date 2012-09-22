@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.bunker.rffz.domain.util.ScheduledTask.Name;
 import com.bunker.rffz.service.feedarticle.CandidateRetrievalService;
+import com.bunker.rffz.service.util.ScheduledTaskService;
 
 @Component("candidateRetrievalJob")
 public class CandidateRetrievalJob {

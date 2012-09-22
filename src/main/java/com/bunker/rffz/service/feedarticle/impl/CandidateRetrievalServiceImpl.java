@@ -14,7 +14,7 @@ import com.bunker.rffz.domain.util.ScheduledTask.Name;
 import com.bunker.rffz.service.feedarticle.CandidateRetrievalService;
 import com.bunker.rffz.service.feedarticle.CandidateService;
 import com.bunker.rffz.service.feedarticle.FeedSourceService;
-import com.bunker.rffz.service.job.ScheduledTaskService;
+import com.bunker.rffz.service.util.ScheduledTaskService;
 import com.sun.syndication.feed.synd.SyndEnclosureImpl;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 
