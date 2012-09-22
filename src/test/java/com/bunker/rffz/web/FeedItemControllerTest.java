@@ -15,7 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.bunker.rffz.domain.feedarticle.dto.FeedItem;
 import com.bunker.rffz.domain.feedarticle.dto.FeedItemList;
-import com.bunker.rffz.service.feedarticle.FeedItemService;
+import com.bunker.rffz.service.feedarticle.publisher.FeedItemService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FeedItemControllerTest {
