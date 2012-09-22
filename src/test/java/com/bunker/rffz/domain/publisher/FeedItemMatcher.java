@@ -4,7 +4,8 @@ import java.text.SimpleDateFormat;
 
 import org.mockito.ArgumentMatcher;
 
-import com.bunker.rffz.domain.analyser.Article;
+import com.bunker.rffz.domain.feedarticle.Article;
+import com.bunker.rffz.domain.feedarticle.dto.FeedItem;
 
 public class FeedItemMatcher extends ArgumentMatcher<FeedItem> {
 

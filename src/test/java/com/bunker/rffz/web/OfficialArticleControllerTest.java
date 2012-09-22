@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bunker.rffz.domain.publisher.OfficialArticle;
-import com.bunker.rffz.domain.publisher.OfficialArticleList;
-import com.bunker.rffz.service.publisher.OfficialArticleService;
+import com.bunker.rffz.domain.officialarticle.dto.OfficialArticle;
+import com.bunker.rffz.domain.officialarticle.dto.OfficialArticleList;
+import com.bunker.rffz.service.officialarticle.OfficialArticleService;
 import com.google.common.collect.Lists;
 
 @RunWith(MockitoJUnitRunner.class)

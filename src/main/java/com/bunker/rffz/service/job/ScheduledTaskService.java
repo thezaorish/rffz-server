@@ -2,7 +2,7 @@ package com.bunker.rffz.service.job;
 
 import java.util.Date;
 
-import com.bunker.rffz.domain.ScheduledTask.Name;
+import com.bunker.rffz.domain.util.ScheduledTask.Name;
 
 public interface ScheduledTaskService {
 

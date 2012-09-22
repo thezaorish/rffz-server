@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.bunker.rffz.domain.ScheduledTask.Name;
-import com.bunker.rffz.service.retriever.CandidateRetrievalService;
+import com.bunker.rffz.domain.util.ScheduledTask.Name;
+import com.bunker.rffz.service.feedarticle.CandidateRetrievalService;
 
 @Component("candidateRetrievalJob")
 public class CandidateRetrievalJob {

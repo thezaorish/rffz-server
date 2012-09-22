@@ -18,10 +18,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bunker.rffz.dao.retriever.CandidateDao;
-import com.bunker.rffz.domain.retriever.Candidate;
-import com.bunker.rffz.domain.retriever.FeedSource;
-import com.bunker.rffz.service.retriever.CandidateService;
+import com.bunker.rffz.dao.feedarticle.CandidateDao;
+import com.bunker.rffz.domain.feedarticle.Candidate;
+import com.bunker.rffz.domain.feedarticle.FeedSource;
+import com.bunker.rffz.service.feedarticle.CandidateService;
+import com.bunker.rffz.service.feedarticle.impl.CandidateServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CandidateServiceImplTest {

@@ -12,8 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bunker.rffz.domain.publisher.OfficialArticleList;
-import com.bunker.rffz.service.publisher.OfficialArticleService;
+import com.bunker.rffz.domain.officialarticle.dto.OfficialArticleList;
+import com.bunker.rffz.service.officialarticle.OfficialArticleService;
 import com.jayway.restassured.specification.RequestSpecification;
 
 @RunWith(SpringJUnit4ClassRunner.class)

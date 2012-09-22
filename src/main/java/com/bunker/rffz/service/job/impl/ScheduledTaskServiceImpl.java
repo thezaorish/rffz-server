@@ -5,9 +5,9 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bunker.rffz.dao.ScheduledTaskDao;
-import com.bunker.rffz.domain.ScheduledTask;
-import com.bunker.rffz.domain.ScheduledTask.Name;
+import com.bunker.rffz.dao.util.ScheduledTaskDao;
+import com.bunker.rffz.domain.util.ScheduledTask;
+import com.bunker.rffz.domain.util.ScheduledTask.Name;
 import com.bunker.rffz.service.job.ScheduledTaskService;
 
 @Service("scheduledTaskService")

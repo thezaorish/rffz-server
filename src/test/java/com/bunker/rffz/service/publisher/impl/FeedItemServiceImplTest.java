@@ -17,14 +17,15 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bunker.rffz.domain.analyser.Article;
-import com.bunker.rffz.domain.publisher.FeedItem;
-import com.bunker.rffz.domain.publisher.FeedItemList;
+import com.bunker.rffz.domain.feedarticle.Article;
+import com.bunker.rffz.domain.feedarticle.Candidate;
+import com.bunker.rffz.domain.feedarticle.FeedSource;
+import com.bunker.rffz.domain.feedarticle.dto.FeedItem;
+import com.bunker.rffz.domain.feedarticle.dto.FeedItemList;
 import com.bunker.rffz.domain.publisher.FeedItemMatcher;
-import com.bunker.rffz.domain.retriever.Candidate;
-import com.bunker.rffz.domain.retriever.FeedSource;
-import com.bunker.rffz.service.analyser.ArticleService;
-import com.bunker.rffz.service.publisher.FeedItemService;
+import com.bunker.rffz.service.feedarticle.ArticleService;
+import com.bunker.rffz.service.feedarticle.FeedItemService;
+import com.bunker.rffz.service.feedarticle.impl.FeedItemServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FeedItemServiceImplTest {

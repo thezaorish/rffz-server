@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bunker.rffz.domain.publisher.OfficialArticleList;
-import com.bunker.rffz.service.publisher.OfficialArticleService;
+import com.bunker.rffz.domain.officialarticle.dto.OfficialArticleList;
+import com.bunker.rffz.service.officialarticle.OfficialArticleService;
 
 @Controller
 @RequestMapping(value = "/official")

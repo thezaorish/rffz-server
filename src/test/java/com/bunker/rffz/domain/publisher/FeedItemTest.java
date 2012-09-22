@@ -7,9 +7,10 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.bunker.rffz.domain.analyser.Article;
-import com.bunker.rffz.domain.retriever.Candidate;
-import com.bunker.rffz.domain.retriever.FeedSource;
+import com.bunker.rffz.domain.feedarticle.Article;
+import com.bunker.rffz.domain.feedarticle.Candidate;
+import com.bunker.rffz.domain.feedarticle.FeedSource;
+import com.bunker.rffz.domain.feedarticle.dto.FeedItem;
 
 public class FeedItemTest {
 

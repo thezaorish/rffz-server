@@ -14,9 +14,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bunker.rffz.dao.retriever.FeedSourceDao;
-import com.bunker.rffz.domain.retriever.FeedSource;
-import com.bunker.rffz.service.retriever.FeedSourceService;
+import com.bunker.rffz.dao.feedarticle.FeedSourceDao;
+import com.bunker.rffz.domain.feedarticle.FeedSource;
+import com.bunker.rffz.service.feedarticle.FeedSourceService;
+import com.bunker.rffz.service.feedarticle.impl.FeedSourceServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FeedSourceServiceImplTest {

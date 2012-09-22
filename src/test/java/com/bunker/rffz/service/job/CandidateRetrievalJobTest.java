@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bunker.rffz.domain.ScheduledTask.Name;
-import com.bunker.rffz.service.retriever.CandidateRetrievalService;
+import com.bunker.rffz.domain.util.ScheduledTask.Name;
+import com.bunker.rffz.service.feedarticle.CandidateRetrievalService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CandidateRetrievalJobTest {

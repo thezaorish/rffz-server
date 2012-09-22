@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bunker.rffz.domain.publisher.FeedItemList;
-import com.bunker.rffz.service.publisher.FeedItemService;
+import com.bunker.rffz.domain.feedarticle.dto.FeedItemList;
+import com.bunker.rffz.service.feedarticle.FeedItemService;
 
 @Controller
 @RequestMapping(value = "/feed")

@@ -18,11 +18,12 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bunker.rffz.dao.analyser.ArticleDao;
-import com.bunker.rffz.domain.analyser.Article;
-import com.bunker.rffz.domain.retriever.Candidate;
-import com.bunker.rffz.domain.retriever.FeedSource;
-import com.bunker.rffz.service.analyser.ArticleService;
+import com.bunker.rffz.dao.feedarticle.ArticleDao;
+import com.bunker.rffz.domain.feedarticle.Article;
+import com.bunker.rffz.domain.feedarticle.Candidate;
+import com.bunker.rffz.domain.feedarticle.FeedSource;
+import com.bunker.rffz.service.feedarticle.ArticleService;
+import com.bunker.rffz.service.feedarticle.impl.ArticleServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ArticleServiceImplTest {

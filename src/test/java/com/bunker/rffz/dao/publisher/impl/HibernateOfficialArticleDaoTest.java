@@ -14,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bunker.rffz.dao.publisher.OfficialArticleDao;
-import com.bunker.rffz.domain.publisher.OfficialArticle;
+import com.bunker.rffz.dao.officialarticle.OfficialArticleDao;
+import com.bunker.rffz.domain.officialarticle.dto.OfficialArticle;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/unitTest-context.xml")

@@ -17,12 +17,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bunker.rffz.dao.analyser.ArticleDao;
-import com.bunker.rffz.dao.retriever.CandidateDao;
-import com.bunker.rffz.dao.retriever.FeedSourceDao;
-import com.bunker.rffz.domain.analyser.Article;
-import com.bunker.rffz.domain.retriever.Candidate;
-import com.bunker.rffz.domain.retriever.FeedSource;
+import com.bunker.rffz.dao.feedarticle.ArticleDao;
+import com.bunker.rffz.dao.feedarticle.CandidateDao;
+import com.bunker.rffz.dao.feedarticle.FeedSourceDao;
+import com.bunker.rffz.domain.feedarticle.Article;
+import com.bunker.rffz.domain.feedarticle.Candidate;
+import com.bunker.rffz.domain.feedarticle.FeedSource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/unitTest-context.xml")

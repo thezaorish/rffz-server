@@ -11,9 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bunker.rffz.dao.ScheduledTaskDao;
-import com.bunker.rffz.domain.ScheduledTask;
-import com.bunker.rffz.domain.ScheduledTask.Name;
+import com.bunker.rffz.dao.util.ScheduledTaskDao;
+import com.bunker.rffz.domain.util.ScheduledTask;
+import com.bunker.rffz.domain.util.ScheduledTask.Name;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/unitTest-context.xml")

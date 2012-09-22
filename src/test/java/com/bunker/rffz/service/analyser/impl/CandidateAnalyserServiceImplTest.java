@@ -19,13 +19,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bunker.rffz.domain.ScheduledTask.Name;
-import com.bunker.rffz.domain.retriever.Candidate;
-import com.bunker.rffz.domain.retriever.FeedSource;
-import com.bunker.rffz.service.analyser.ArticleService;
-import com.bunker.rffz.service.analyser.CandidateAnalyserService;
+import com.bunker.rffz.domain.feedarticle.Candidate;
+import com.bunker.rffz.domain.feedarticle.FeedSource;
+import com.bunker.rffz.domain.util.ScheduledTask.Name;
+import com.bunker.rffz.service.feedarticle.ArticleService;
+import com.bunker.rffz.service.feedarticle.CandidateAnalyserService;
+import com.bunker.rffz.service.feedarticle.CandidateService;
+import com.bunker.rffz.service.feedarticle.impl.CandidateAnalyserServiceImpl;
 import com.bunker.rffz.service.job.ScheduledTaskService;
-import com.bunker.rffz.service.retriever.CandidateService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CandidateAnalyserServiceImplTest {
