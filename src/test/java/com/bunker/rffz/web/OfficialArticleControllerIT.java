@@ -25,7 +25,7 @@ public class OfficialArticleControllerIT {
 	private static final String MIME_XML = "application/xml";
 	private static final String MIME_ATOM = "application/atom+xml";
 	
-	private static final String REST_ALL_ARTICLES_URL = "http://localhost:8080/official/steaua";
+	private static final String BASE_OFFICIAL_ARTICLE_URL = "http://localhost:8484/official/steaua";
 
 	@Autowired
 	private OfficialArticleService officialArticleService;
@@ -35,7 +35,7 @@ public class OfficialArticleControllerIT {
 		// given
 		OfficialArticleList officialArticleList = officialArticleService.getOfficialArticlesList(1, 5);
 
-		String restUrl = REST_ALL_ARTICLES_URL + "?page=1&size=5";
+		String restUrl = BASE_OFFICIAL_ARTICLE_URL + "?page=1&size=5";
 
 		// when we request a xml response
 		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_XML);
@@ -52,7 +52,7 @@ public class OfficialArticleControllerIT {
 		// given
 		OfficialArticleList officialArticleList = officialArticleService.getOfficialArticlesList(3, 1);
 
-		String restUrl = REST_ALL_ARTICLES_URL + "?page=3&size=1";
+		String restUrl = BASE_OFFICIAL_ARTICLE_URL + "?page=3&size=1";
 
 		// when we request a json response
 		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_JSON);
@@ -69,7 +69,7 @@ public class OfficialArticleControllerIT {
 		// given
 		OfficialArticleList officialArticleList = officialArticleService.getOfficialArticlesList(2, 2);
 
-		String restUrl = REST_ALL_ARTICLES_URL + "?page=2&size=2";
+		String restUrl = BASE_OFFICIAL_ARTICLE_URL + "?page=2&size=2";
 
 		// when we request an atom response
 		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_ATOM);

@@ -87,3 +87,42 @@ CREATE TABLE `article` (
   CONSTRAINT `FK379164D6B1739B1A` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1361 DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 -- executed on live 01.04.2012
+
+
+-- official article
+CREATE TABLE `official_article` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `content` longtext COLLATE utf8_romanian_ci NOT NULL,
+  `created_date` datetime NOT NULL,
+  `description` longtext COLLATE utf8_romanian_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8_romanian_ci NOT NULL,
+  `published` varchar(255) COLLATE utf8_romanian_ci NOT NULL,
+  `thumbnail` varchar(255) COLLATE utf8_romanian_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8_romanian_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
+-- executed on stage 14.10.2012
+
+insert into scheduled_task (id, name, active, last_run) values (3, 'OfficialArticlesRetrievalJob', 1, NOW());
+-- executed on stage 14.10.2012
+
+
+-- ranking
+CREATE TABLE `ranking` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `games_lost` int(11) NOT NULL,
+  `games_played` int(11) NOT NULL,
+  `games_tied` int(11) NOT NULL,
+  `games_won` int(11) NOT NULL,
+  `goals_received` int(11) NOT NULL,
+  `goals_scored` int(11) NOT NULL,
+  `points` int(11) NOT NULL,
+  `rank` int(11) NOT NULL,
+  `team` varchar(255) COLLATE utf8_romanian_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8_romanian_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=505 DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
+-- executed on stage 14.10.2012
+
+insert into scheduled_task (id, name, active, last_run) values (4, 'RankingRetrievalJob', 1, NOW());
+-- executed on stage 14.10.2012
