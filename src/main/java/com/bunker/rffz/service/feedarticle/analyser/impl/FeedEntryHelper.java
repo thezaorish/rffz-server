@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.sun.syndication.feed.synd.SyndEntryImpl;
@@ -21,26 +22,29 @@ import com.sun.syndication.io.XmlReader;
 @Component("feedEntryHelper")
 public class FeedEntryHelper {
 
+	private static final Logger logger = Logger.getLogger(FeedEntryHelper.class);
+
 	public List<SyndEntryImpl> getFeedEntries(String feedSourceUrl) {
 		List<SyndEntryImpl> feedEntries = new ArrayList<SyndEntryImpl>();
 
 		URL url = null;
 		try {
 			url = new URL(feedSourceUrl);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
 
-		SyndFeedInput input = new SyndFeedInput();
-		try {
-			SyndFeed feed = input.build(new XmlReader(url));
-			feedEntries = feed.getEntries();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (FeedException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			SyndFeedInput input = new SyndFeedInput();
+			try {
+				SyndFeed feed = input.build(new XmlReader(url));
+				feedEntries = feed.getEntries();
+			} catch (IllegalArgumentException e) {
+				logger.warn("getFeedEntries: exception occured when processing " + feedSourceUrl, e);
+			} catch (FeedException e) {
+				logger.warn("getFeedEntries: exception occured when processing " + feedSourceUrl, e);
+			} catch (IOException e) {
+				logger.warn("getFeedEntries: exception occured when processing " + feedSourceUrl, e);
+			}
+			// NOTE multiple catches, I might handle them separately
+		} catch (MalformedURLException e) {
+			logger.warn("generateCandidates: exception occured when processing " + feedSourceUrl, e);
 		}
 
 		return feedEntries;
