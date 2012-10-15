@@ -15,6 +15,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 @Entity
 @Table(name = "ranking")
 @XmlRootElement(name = "ranking")
@@ -142,50 +145,11 @@ public class Ranking  implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + gamesLost;
-		result = prime * result + gamesPlayed;
-		result = prime * result + gamesTied;
-		result = prime * result + gamesWon;
-		result = prime * result + goalsReceived;
-		result = prime * result + goalsScored;
-		result = prime * result + points;
-		result = prime * result + rank;
-		result = prime * result + ((team == null) ? 0 : team.hashCode());
-		return result;
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Ranking other = (Ranking) obj;
-		if (gamesLost != other.gamesLost)
-			return false;
-		if (gamesPlayed != other.gamesPlayed)
-			return false;
-		if (gamesTied != other.gamesTied)
-			return false;
-		if (gamesWon != other.gamesWon)
-			return false;
-		if (goalsReceived != other.goalsReceived)
-			return false;
-		if (goalsScored != other.goalsScored)
-			return false;
-		if (points != other.points)
-			return false;
-		if (rank != other.rank)
-			return false;
-		if (team == null) {
-			if (other.team != null)
-				return false;
-		} else if (!team.equals(other.team))
-			return false;
-		return true;
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 	
 	@Override

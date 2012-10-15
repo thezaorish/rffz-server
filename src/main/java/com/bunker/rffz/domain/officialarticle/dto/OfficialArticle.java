@@ -16,12 +16,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 @Entity
 @Table(name = "official_article")
 @XmlRootElement(name = "officialArticle")
 @XmlAccessorType(XmlAccessType.NONE)
 public class OfficialArticle {
 
+	private final static String[] EXCLUDED_FIELDS = new String[] {"creationDate"};
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@XmlElement
@@ -144,63 +149,12 @@ public class OfficialArticle {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((image == null) ? 0 : image.hashCode());
-		result = prime * result
-				+ ((published == null) ? 0 : published.hashCode());
-		result = prime * result
-				+ ((thumbnail == null) ? 0 : thumbnail.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+		return HashCodeBuilder.reflectionHashCode(this, EXCLUDED_FIELDS);
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OfficialArticle other = (OfficialArticle) obj;
-		if (content == null) {
-			if (other.content != null)
-				return false;
-		} else if (!content.equals(other.content))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (id != other.id)
-			return false;
-		if (image == null) {
-			if (other.image != null)
-				return false;
-		} else if (!image.equals(other.image))
-			return false;
-		if (published == null) {
-			if (other.published != null)
-				return false;
-		} else if (!published.equals(other.published))
-			return false;
-		if (thumbnail == null) {
-			if (other.thumbnail != null)
-				return false;
-		} else if (!thumbnail.equals(other.thumbnail))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
+		return EqualsBuilder.reflectionEquals(this, obj, EXCLUDED_FIELDS);
 	}
 	
 	@Override

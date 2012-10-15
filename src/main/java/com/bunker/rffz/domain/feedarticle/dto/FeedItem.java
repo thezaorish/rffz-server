@@ -7,14 +7,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import com.bunker.rffz.domain.feedarticle.Article;
 import com.bunker.rffz.domain.feedarticle.Candidate;
-import com.google.common.base.Objects;
 
 @XmlRootElement(name = "feedItem")
 @XmlAccessorType(XmlAccessType.NONE)
 public class FeedItem {
 
+	private final static String[] EXCLUDED_FIELDS = new String[] {"creationDate", "publishDate"};
+	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
 
 	@XmlElement
@@ -104,20 +108,12 @@ public class FeedItem {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(title, description, imagePath, url, source);
+		return HashCodeBuilder.reflectionHashCode(this, EXCLUDED_FIELDS);
 	}
-
+	
 	@Override
-	public boolean equals(final Object obj) {
-		if (!(obj instanceof FeedItem)) {
-			return false;
-		}
-		FeedItem other = (FeedItem) obj;
-		return Objects.equal(title, other.title)
-			&& Objects.equal(description, other.description)
-			&& Objects.equal(imagePath, other.imagePath)
-			&& Objects.equal(url, other.url)
-			&& Objects.equal(source, other.source);
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj, EXCLUDED_FIELDS);
 	}
 	
 	@Override

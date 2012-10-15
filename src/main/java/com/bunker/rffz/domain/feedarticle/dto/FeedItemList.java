@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 @XmlRootElement(name = "feedItemList")
 @XmlAccessorType(XmlAccessType.NONE)
 public class FeedItemList {
@@ -30,27 +33,12 @@ public class FeedItemList {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((feedItems == null) ? 0 : feedItems.hashCode());
-		return result;
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		FeedItemList other = (FeedItemList) obj;
-		if (feedItems == null) {
-			if (other.feedItems != null)
-				return false;
-		} else if (!feedItems.equals(other.feedItems))
-			return false;
-		return true;
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 	
 	@Override

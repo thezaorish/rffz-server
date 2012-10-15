@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 @XmlRootElement(name = "officialArticleList")
 @XmlAccessorType(XmlAccessType.NONE)
 public class OfficialArticleList {
@@ -29,20 +32,13 @@ public class OfficialArticleList {
 	}
 	
 	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OfficialArticleList other = (OfficialArticleList) obj;
-		if (officialArticles == null) {
-			if (other.officialArticles != null)
-				return false;
-		} else if (!officialArticles.equals(other.officialArticles))
-			return false;
-		return true;
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	@Override
