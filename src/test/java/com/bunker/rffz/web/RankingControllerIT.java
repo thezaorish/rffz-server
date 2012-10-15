@@ -25,7 +25,7 @@ public class RankingControllerIT {
 	private static final String MIME_XML = "application/xml";
 	private static final String MIME_ATOM = "application/atom+xml";
 	
-	private static final String REST_RANKINGS_URL = "http://localhost:8080/ranking/steaua";
+	private static final String REST_RANKINGS_URL = "http://localhost:8484/ranking/steaua";
 	
 	@Autowired
 	private RankingService rankingService;
