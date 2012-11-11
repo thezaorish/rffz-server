@@ -47,23 +47,18 @@ public class Ranking  implements Serializable {
 	private int gamesPlayed;
 	
 	@Column(name = "games_won")
-	@XmlElement(name = "won")
 	private int gamesWon;
 	
 	@Column(name = "games_tied")
-	@XmlElement(name = "tied")
 	private int gamesTied;
 	
 	@Column(name = "games_lost")
-	@XmlElement(name = "lost")
 	private int gamesLost;
 	
 	@Column(name = "goals_scored")
-	@XmlElement(name = "scored")
 	private int goalsScored;
 	
 	@Column(name = "goals_received")
-	@XmlElement(name = "received")
 	private int goalsReceived;
 	
 	public long getId() {
@@ -141,6 +136,11 @@ public class Ranking  implements Serializable {
 	}
 	public void setGoalsReceived(int goalsReceived) {
 		this.goalsReceived = goalsReceived;
+	}
+	
+	@XmlElement(name = "goals")
+	public int getGoals() {
+		return getGoalsScored() - getGoalsReceived();
 	}
 
 	@Override
