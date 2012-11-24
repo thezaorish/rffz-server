@@ -103,6 +103,9 @@ CREATE TABLE `official_article` (
 ) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 -- executed on stage 14.10.2012
 
+alter table official_article add url varchar(255) COLLATE utf8_romanian_ci NOT NULL;
+-- executed on stage 24.11.2012
+
 insert into scheduled_task (id, name, active, last_run) values (3, 'OfficialArticlesRetrievalJob', 1, NOW());
 -- executed on stage 14.10.2012
 

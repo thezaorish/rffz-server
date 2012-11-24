@@ -29,15 +29,15 @@ public class HibernateOfficialArticleDaoTest {
 	public void shouldGetOfficialArticlesPaginated() {
 		// given
 		OfficialArticle officialArticle1 = new OfficialArticle().creationDate(new Date(1000))
-				.title("title").description("description").content("content").thumbnail("thumbnail").image("image").published("published");
+				.title("title").description("description").content("content").url("").thumbnail("thumbnail").image("image").published("published");
 		officialArticleDao.save(officialArticle1);
 		
 		OfficialArticle officialArticle2 = new OfficialArticle().creationDate(new Date(0))
-				.title("title").description("description").content("content").thumbnail("thumbnail").image("image").published("published");
+				.title("title").description("description").content("content").url("").thumbnail("thumbnail").image("image").published("published");
 		officialArticleDao.save(officialArticle2);
 		
 		OfficialArticle officialArticle3 = new OfficialArticle().creationDate(new Date(999999))
-				.title("title").description("description").content("content").thumbnail("thumbnail").image("image").published("published");
+				.title("title").description("description").content("content").url("").thumbnail("thumbnail").image("image").published("published");
 		officialArticleDao.save(officialArticle3);
 		
 		// when
@@ -50,15 +50,15 @@ public class HibernateOfficialArticleDaoTest {
 	public void shouldGetOfficialArticlesPaginated2() {
 		// given
 		OfficialArticle officialArticle1 = new OfficialArticle().creationDate(new Date())
-				.title("title").description("description").content("content").thumbnail("thumbnail").image("image").published("published");
+				.title("title").description("description").content("content").url("").thumbnail("thumbnail").image("image").published("published");
 		officialArticleDao.save(officialArticle1);
 		
 		OfficialArticle officialArticle2 = new OfficialArticle().creationDate(new Date(0))
-				.title("title").description("description").content("content").thumbnail("thumbnail").image("image").published("published");
+				.title("title").description("description").content("content").url("").thumbnail("thumbnail").image("image").published("published");
 		officialArticleDao.save(officialArticle2);
 		
 		OfficialArticle officialArticle3 = new OfficialArticle().creationDate(new Date(999999))
-				.title("title").description("description").content("content").thumbnail("thumbnail").image("image").published("published");
+				.title("title").description("description").content("content").url("").thumbnail("thumbnail").image("image").published("published");
 		officialArticleDao.save(officialArticle3);
 		
 		// when

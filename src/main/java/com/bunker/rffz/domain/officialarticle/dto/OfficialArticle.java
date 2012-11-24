@@ -34,7 +34,6 @@ public class OfficialArticle {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_date", nullable = false)
-	@XmlElement
 	private Date creationDate;
 
 	@Column(nullable = false)
@@ -47,9 +46,13 @@ public class OfficialArticle {
 	private String description;
 
 	@Column(nullable = false)
-	@Lob@
-	XmlElement
+	@Lob
+	@XmlElement
 	private String content;
+	
+	@Column(nullable = false)
+	@XmlElement
+	private String url;
 	
 	@Column(nullable = false)
 	@XmlElement
@@ -113,7 +116,18 @@ public class OfficialArticle {
 		setContent(content);
 		return this;
 	}
-
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public OfficialArticle url(String url) {
+		this.url = url;
+		return this;
+	}
+	
 	public String getThumbnail() {
 		return thumbnail;
 	}
