@@ -68,11 +68,11 @@ public class Candidate implements Serializable {
 		// INFO needed by hibernate
 	}
 	public Candidate(String title, String description, Date publishDate, String url, FeedSource feedSource) {
-		this.title = title;
-		this.description = description;
-		this.publishDate = publishDate;
-		this.url = url;
-		this.feedSource = feedSource;
+		setTitle(title);
+		setDescription(description);
+		setPublishDate(publishDate);
+		setUrl(url);
+		setFeedSource(feedSource);
 	}
 
 	public long getId() {
@@ -100,7 +100,7 @@ public class Candidate implements Serializable {
 		return publishDate;
 	}
 	public void setPublishDate(Date publishDate) {
-		this.publishDate = publishDate;
+		this.publishDate = (publishDate == null) ? new Date() : publishDate;
 	}
 
 	public String getUrl() {
