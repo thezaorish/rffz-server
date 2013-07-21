@@ -1,6 +1,8 @@
 package com.bunker.rffz.web;
 
 import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.config.RestAssuredConfig.newConfig;
+import static com.jayway.restassured.config.DecoderConfig.decoderConfig;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -38,7 +40,7 @@ public class FeedItemControllerIT {
 		String restUrl = BASE_FEED_ARTICLES_URL + "?page=1&size=5";
 
 		// when we request a xml response
-		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_XML);
+		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_XML).config(newConfig().decoderConfig(decoderConfig().defaultContentCharset("UTF-8")));
 
 		int statusCode = requestSpecification.get(restUrl).getStatusCode();
 		FeedItemList retrievedFeedItemList = requestSpecification.get(restUrl).as(FeedItemList.class);
@@ -55,7 +57,7 @@ public class FeedItemControllerIT {
 		String restUrl = BASE_FEED_ARTICLES_URL + "?page=3&size=1";
 
 		// when we request a json response
-		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_JSON);
+		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_JSON).config(newConfig().decoderConfig(decoderConfig().defaultContentCharset("UTF-8")));
 
 		int statusCode = requestSpecification.get(restUrl).getStatusCode();
 		FeedItemList retrievedFeedItemList = requestSpecification.get(restUrl).as(FeedItemList.class);
@@ -72,7 +74,7 @@ public class FeedItemControllerIT {
 		String restUrl = BASE_FEED_ARTICLES_URL + "?page=2&size=2";
 
 		// when we request an atom response
-		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_ATOM);
+		RequestSpecification requestSpecification = given().header(HttpHeaders.ACCEPT, MIME_ATOM).config(newConfig().decoderConfig(decoderConfig().defaultContentCharset("UTF-8")));
 
 		int statusCode = requestSpecification.get(restUrl).getStatusCode();
 		FeedItemList retrievedFeedItemList = requestSpecification.get(restUrl).as(FeedItemList.class);
