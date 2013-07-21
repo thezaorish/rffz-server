@@ -2,6 +2,7 @@ package com.bunker.rffz.service.feedarticle.analyser.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,10 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public void createArticle(Candidate candidate) {
-		Article article = new Article(candidate);
+        if (StringUtils.isBlank(candidate.getTitle()) || StringUtils.isBlank(candidate.getDescription())) {
+            return;
+        }
+        Article article = new Article(candidate);
 		articleDao.save(article);
 		logger.info("createArticle with id: " + article.getId());
 	}

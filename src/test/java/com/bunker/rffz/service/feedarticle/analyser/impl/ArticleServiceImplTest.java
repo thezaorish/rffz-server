@@ -2,8 +2,10 @@ package com.bunker.rffz.service.feedarticle.analyser.impl;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.never;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +25,6 @@ import com.bunker.rffz.domain.feedarticle.Article;
 import com.bunker.rffz.domain.feedarticle.Candidate;
 import com.bunker.rffz.domain.feedarticle.FeedSource;
 import com.bunker.rffz.service.feedarticle.analyser.ArticleService;
-import com.bunker.rffz.service.feedarticle.analyser.impl.ArticleServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ArticleServiceImplTest {
@@ -50,6 +51,54 @@ public class ArticleServiceImplTest {
 		// then
 		verify(articleDao).save(Matchers.argThat(new ArticleMatcher(candidate)));
 	}
+    @Test
+    public void shouldNotCreateArticleFromInvalidCandidate_emptyName() {
+        // given an invalid candidate
+        FeedSource feedSource = new FeedSource("name", "url");
+        Candidate candidate = new Candidate("name", "", new Date(1000), "link", feedSource);
+
+        // when
+        articleService.createArticle(candidate);
+
+        // then
+        verify(articleDao, never()).save(any(Article.class));
+    }
+    @Test
+    public void shouldNotCreateArticleFromInvalidCandidate_nullName() {
+        // given an invalid candidate
+        FeedSource feedSource = new FeedSource("name", "url");
+        Candidate candidate = new Candidate("name", null, new Date(1000), "link", feedSource);
+
+        // when
+        articleService.createArticle(candidate);
+
+        // then
+        verify(articleDao, never()).save(any(Article.class));
+    }
+    @Test
+    public void shouldNotCreateArticleFromInvalidCandidate_emptyDescription() {
+        // given an invalid candidate
+        FeedSource feedSource = new FeedSource("name", "url");
+        Candidate candidate = new Candidate("name", "", new Date(1000), "link", feedSource);
+
+        // when
+        articleService.createArticle(candidate);
+
+        // then
+        verify(articleDao, never()).save(any(Article.class));
+    }
+    @Test
+    public void shouldNotCreateArticleFromInvalidCandidate_nullDescription() {
+        // given an invalid candidate
+        FeedSource feedSource = new FeedSource("name", "url");
+        Candidate candidate = new Candidate("name", null, new Date(1000), "link", feedSource);
+
+        // when
+        articleService.createArticle(candidate);
+
+        // then
+        verify(articleDao, never()).save(any(Article.class));
+    }
 
 	class ArticleMatcher extends ArgumentMatcher<Article> {
 
@@ -74,7 +123,7 @@ public class ArticleServiceImplTest {
 			}
 
 			return true;
-		}
+        }
 
 	}
 
