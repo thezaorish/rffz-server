@@ -36,8 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public List<Article> getArticles(int page, int size) {
-		List<Article> articles = articleDao.getArticles(page, size);
-		return articles;
+        return articleDao.getArticles(page, size);
 	}
 
 }

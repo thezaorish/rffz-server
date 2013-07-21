@@ -24,8 +24,7 @@ public class OfficialArticleController {
 	@RequestMapping(value = "/steaua", params = { "page", "size" }, method = RequestMethod.GET)
 	@ResponseBody
 	public OfficialArticleList getPaginatedOfficialArticles(@RequestParam("page") int page, @RequestParam("size") int size) {
-		OfficialArticleList officialArticles = officialArticleService.getOfficialArticlesList(page, size);
-		return officialArticles;
+        return officialArticleService.getOfficialArticlesList(page, size);
 	}
 	
 }

@@ -29,8 +29,7 @@ public class HibernateOfficialArticleDao extends HibernateDaoSupport implements 
 	public List<OfficialArticle> getOfficialArticles(int page, int size) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(OfficialArticle.class);
 		criteria.addOrder(Order.desc("creationDate"));
-		List<OfficialArticle> articles = getHibernateTemplate().findByCriteria(criteria, (page - 1) * size, size);
-		return articles;
+        return getHibernateTemplate().findByCriteria(criteria, (page - 1) * size, size);
 	}
 
 }

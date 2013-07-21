@@ -31,7 +31,7 @@ public class FeedItemControllerTest {
 	}
 
 	@Test
-	public void sholdGetPaginatedFeedItems() {
+	public void shouldGetPaginatedFeedItems() {
 		// given some feed items
 		int page = 2;
 		int size = 5;

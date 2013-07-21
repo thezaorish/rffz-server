@@ -46,15 +46,15 @@ public class OfficialArticlesServiceImplTest {
 		OfficialArticle officialArticle2 = new OfficialArticle().creationDate(new Date(0))
 				.title("title").description("description").content("content").thumbnail("thumbnail").image("image").published("published");
 		
-		List<OfficialArticle> officialAtticles = Lists.newArrayList(officialArticle1, officialArticle2);
-		given(officialArticleDao.getOfficialArticles(page, size)).willReturn(officialAtticles);
+		List<OfficialArticle> officialArticles = Lists.newArrayList(officialArticle1, officialArticle2);
+		given(officialArticleDao.getOfficialArticles(page, size)).willReturn(officialArticles);
 		
 		// when
 		OfficialArticleList result = officialArticleService.getOfficialArticlesList(page, size);
 		
 		// then
 		verify(officialArticleDao).getOfficialArticles(page, size);
-		assertThat(result.getOfficialArticles(), is(officialAtticles));
+		assertThat(result.getOfficialArticles(), is(officialArticles));
 	}
 	
 }

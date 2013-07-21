@@ -35,8 +35,7 @@ public class HibernateArticleDao extends HibernateDaoSupport implements ArticleD
 		DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
 		criteria.createAlias("candidate", "c");
 		criteria.addOrder(Order.desc("c.publishDate"));
-		List<Article> articles = getHibernateTemplate().findByCriteria(criteria, (page - 1) * size, size);
-		return articles;
+        return getHibernateTemplate().findByCriteria(criteria, (page - 1) * size, size);
 	}
 
 }

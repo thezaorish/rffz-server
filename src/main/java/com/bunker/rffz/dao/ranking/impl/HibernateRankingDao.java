@@ -27,8 +27,7 @@ public class HibernateRankingDao extends HibernateDaoSupport implements RankingD
 		DetachedCriteria criteria = DetachedCriteria.forClass(Ranking.class);
 		criteria.add(Restrictions.eq("type", type));
 		criteria.addOrder(Order.asc("rank"));
-		List<Ranking> rankings = getHibernateTemplate().findByCriteria(criteria);
-		return rankings;
+        return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@Override

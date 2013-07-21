@@ -42,7 +42,7 @@ public class CandidateAnalyserServiceImpl implements CandidateAnalyserService {
 				candidate.setProcessed(true);
 				candidateService.updateCandidate(candidate);
 			} catch (Exception ex) {
-				logger.warn("analyseCandidates: exception occured when analysing candidate with id " + candidate.getId());
+				logger.warn("analyseCandidates: exception occurred when analysing candidate with id " + candidate.getId());
 			}
 		}
 		scheduledTaskService.updateLastRun(Name.CandidatesAnalyserJob);

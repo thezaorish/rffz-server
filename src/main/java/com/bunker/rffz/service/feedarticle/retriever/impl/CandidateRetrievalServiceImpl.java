@@ -47,15 +47,13 @@ public class CandidateRetrievalServiceImpl implements CandidateRetrievalService 
 			String feedSourceUrl = feedSource.getUrl();
 
 			List<SyndEntryImpl> feedEntries = feedEntryHelper.getFeedEntries(feedSourceUrl);
-			Iterator itr = feedEntries.iterator();
-			while (itr.hasNext()) {
-				SyndEntryImpl element = (SyndEntryImpl) itr.next();
-				try {
-					createCandidate(element, feedSource, lastRetrievalDate);
-				} catch (Exception ex) {
-					logger.warn("generateCandidates: exception occured when creating candidate for " + element);
-				}
-			}
+            for (SyndEntryImpl element : feedEntries) {
+                try {
+                    createCandidate(element, feedSource, lastRetrievalDate);
+                } catch (Exception ex) {
+                    logger.warn("generateCandidates: exception occurred when creating candidate for " + element);
+                }
+            }
 		}
 
 		scheduledTaskService.updateLastRun(Name.CandidatesRetrievalJob);

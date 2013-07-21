@@ -27,7 +27,7 @@ public class FeedEntryHelper {
 	public List<SyndEntryImpl> getFeedEntries(String feedSourceUrl) {
 		List<SyndEntryImpl> feedEntries = new ArrayList<SyndEntryImpl>();
 
-		URL url = null;
+		URL url;
 		try {
 			url = new URL(feedSourceUrl);
 
@@ -36,15 +36,15 @@ public class FeedEntryHelper {
 				SyndFeed feed = input.build(new XmlReader(url));
 				feedEntries = feed.getEntries();
 			} catch (IllegalArgumentException e) {
-				logger.warn("getFeedEntries: exception occured when processing " + feedSourceUrl, e);
+				logger.warn("getFeedEntries: exception occurred when processing " + feedSourceUrl, e);
 			} catch (FeedException e) {
-				logger.warn("getFeedEntries: exception occured when processing " + feedSourceUrl, e);
+				logger.warn("getFeedEntries: exception occurred when processing " + feedSourceUrl, e);
 			} catch (IOException e) {
-				logger.warn("getFeedEntries: exception occured when processing " + feedSourceUrl, e);
+				logger.warn("getFeedEntries: exception occurred when processing " + feedSourceUrl, e);
 			}
 			// NOTE multiple catches, I might handle them separately
 		} catch (MalformedURLException e) {
-			logger.warn("generateCandidates: exception occured when processing " + feedSourceUrl, e);
+			logger.warn("generateCandidates: exception occurred when processing " + feedSourceUrl, e);
 		}
 
 		return feedEntries;

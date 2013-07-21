@@ -21,8 +21,7 @@ public class FeedSourceServiceImpl implements FeedSourceService {
 
 	@Override
 	public List<FeedSource> getAllFeedSources() {
-		List<FeedSource> feedSources = feedSourceDao.getAllFeedSources();
-		return feedSources;
+        return feedSourceDao.getAllFeedSources();
 	}
 
 }

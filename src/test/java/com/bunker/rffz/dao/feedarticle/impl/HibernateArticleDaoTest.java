@@ -37,7 +37,6 @@ public class HibernateArticleDaoTest {
 	private FeedSourceDao feedSourceDao;
 
 	private Article article;
-	private Candidate candidate;
 	private FeedSource feedSource;
 
 	@Before
@@ -45,7 +44,7 @@ public class HibernateArticleDaoTest {
 		feedSource = new FeedSource("feedName", "feedUrl");
 		feedSourceDao.save(feedSource);
 
-		candidate = new Candidate("title", "description", new Date(), "link", feedSource);
+        Candidate candidate = new Candidate("title", "description", new Date(), "link", feedSource);
 		candidate.setImagePath("imagePath");
 		candidateDao.save(candidate);
 

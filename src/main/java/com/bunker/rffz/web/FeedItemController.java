@@ -24,8 +24,7 @@ public class FeedItemController {
 	@RequestMapping(value = "/steaua", params = { "page", "size" }, method = RequestMethod.GET)
 	@ResponseBody
 	public FeedItemList getPaginatedFeeds(@RequestParam("page") int page, @RequestParam("size") int size) {
-		FeedItemList items = feedItemService.getFeedItemList(page, size);
-		return items;
+        return feedItemService.getFeedItemList(page, size);
 	}
 
 }

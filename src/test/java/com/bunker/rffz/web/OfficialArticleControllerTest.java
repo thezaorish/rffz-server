@@ -30,7 +30,7 @@ public class OfficialArticleControllerTest {
 	}
 	
 	@Test
-	public void sholdGetPaginatedOfficialArticles() {
+	public void shouldGetPaginatedOfficialArticles() {
 		// given some feed items
 		int page = 2;
 		int size = 5;

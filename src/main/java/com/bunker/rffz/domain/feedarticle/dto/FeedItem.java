@@ -17,9 +17,9 @@ import com.bunker.rffz.domain.feedarticle.Candidate;
 @XmlAccessorType(XmlAccessType.NONE)
 public class FeedItem {
 
-	private final static String[] EXCLUDED_FIELDS = new String[] {"creationDate", "publishDate"};
-	
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
+	private static final String[] EXCLUDED_FIELDS = new String[] {"creationDate", "publishDate"};
+
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
 
 	@XmlElement
 	private String title;

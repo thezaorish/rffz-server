@@ -33,7 +33,7 @@ public class RankingControllerIT {
 	@Test
 	public void shouldGetNationalRankingsAsXml() {
 		// given
-		RankingList nationalRankigns = rankingService.getNationalLeagueRanking();
+		RankingList nationalRankings = rankingService.getNationalLeagueRanking();
 
 		String restUrl = REST_RANKINGS_URL + "/national";
 
@@ -45,7 +45,7 @@ public class RankingControllerIT {
 
 		// then
 		assertThat(statusCode, is(200));
-		assertThat(retrievedNationalRankings, is(nationalRankigns));
+		assertThat(retrievedNationalRankings, is(nationalRankings));
 	}
 	@Test
 	public void shouldGetNationalRankingsAsJson() {

@@ -25,11 +25,11 @@ public class HibernateRankingDaoTest {
 	private RankingDao rankingDao;
 	
 	@Test
-	public void shouldGetRankingsOnlyByTheRequeiredType() {
+	public void shouldGetRankingsOnlyByTheRequiredType() {
 		// given
-		Ranking natinalRanking = new Ranking();
-		natinalRanking.setType(RankingType.NationalLeague);
-		rankingDao.save(natinalRanking);
+		Ranking nationalRanking = new Ranking();
+		nationalRanking.setType(RankingType.NationalLeague);
+		rankingDao.save(nationalRanking);
 		
 		Ranking europeanRanking = new Ranking();
 		europeanRanking.setType(RankingType.EuropeanLeague);
@@ -40,7 +40,7 @@ public class HibernateRankingDaoTest {
 		
 		// then
 		assertThat(retrievedRankings.size(), is(1));
-		assertThat(retrievedRankings.get(0), is(natinalRanking));
+		assertThat(retrievedRankings.get(0), is(nationalRanking));
 	}
 	
 	@Test

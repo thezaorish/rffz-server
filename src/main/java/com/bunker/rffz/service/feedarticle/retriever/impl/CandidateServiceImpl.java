@@ -33,8 +33,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public List<Candidate> getUnprocessedCandidates() {
-		List<Candidate> candidates = candidateDao.getUnprocessedCandidates();
-		return candidates;
+        return candidateDao.getUnprocessedCandidates();
 	}
 
 	@Override
