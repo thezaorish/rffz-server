@@ -11,6 +11,7 @@ public class RffzServerApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		//
 	}
 
 }
