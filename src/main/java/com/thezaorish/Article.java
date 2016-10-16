@@ -1,11 +1,16 @@
 package com.thezaorish;
 
-import org.springframework.hateoas.ResourceSupport;
+
+import java.util.UUID;
+
+import static java.util.UUID.randomUUID;
 
 /**
  * Created by zaorish on 28/06/16.
  */
-public class Article extends ResourceSupport {
+public class Article {
+
+	private UUID id = randomUUID();
 
 	private String title;
 
@@ -13,11 +18,19 @@ public class Article extends ResourceSupport {
 
 	private String source;
 
-	private String publishDate;
+	private long publishDate;
 
 	private String imagePath;
 
 	private String url;
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;
@@ -40,10 +53,10 @@ public class Article extends ResourceSupport {
 		this.source = source;
 	}
 
-	public String getPublishDate() {
+	public long getPublishDate() {
 		return publishDate;
 	}
-	public void setPublishDate(String publishDate) {
+	public void setPublishDate(long publishDate) {
 		this.publishDate = publishDate;
 	}
 

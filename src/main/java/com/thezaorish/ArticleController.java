@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.hateoas.Link.REL_NEXT;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -26,20 +28,20 @@ public class ArticleController {
 	public HttpEntity<PagedResources<Resource<Article>>> articles(@RequestParam(required = false, defaultValue = "10") long size, @RequestParam(required = false, defaultValue = "1") long page) {
 		long totalElements = 31;
 
-		List<Resource<Article>> articles = new ArrayList<Resource<Article>>();
+		List<Resource<Article>> articles = new ArrayList<>();
 		articles.add(article1());
 		articles.add(article2());
 
-		PagedResources<Resource<Article>> resources =  new PagedResources(articles, new PageMetadata(size, page, totalElements));
+		PagedResources<Resource<Article>> resources = new PagedResources(articles, new PageMetadata(size, page, totalElements));
 		resources.add(linkTo(methodOn(ArticleController.class).articles(10, 1)).withSelfRel());
 		resources.add(linkTo(methodOn(ArticleController.class).articles(10, 2)).withRel(REL_NEXT));
 
-		return new ResponseEntity<PagedResources<Resource<Article>>>(resources, OK);
+		return new ResponseEntity<>(resources, OK);
 	}
 
-	@RequestMapping("/articles/{url}")
-	public HttpEntity<Resource<Article>> article(@PathVariable String url) {
-		return new ResponseEntity<Resource<Article>>(article1(), OK);
+	@RequestMapping("/articles/{id}")
+	public HttpEntity<Resource<Article>> article(@PathVariable UUID id) {
+		return new ResponseEntity<>(article1(), OK);
 	}
 
 	private Resource<Article> article1() {
@@ -49,12 +51,12 @@ public class ArticleController {
 				"Mijlocașul se va alătura lotului antrenat de Laurențiu Reghecampf pentru cel de-al doilea cantonament din această vară, care va avea loc &amp;#238;n Olanda.\n" +
 				"Chipciu a venit singur la testele medicale și nu a discutat cu reprezentanții presei, notează Digi Sport. ...");
 		article.setImagePath("http://www9.gsp.ro/usr/thumbs/thumb_290_x_208/2016/06/30/741743-707555-chipciu.jpg");
-		article.setPublishDate("29-06-2016-21-00-00");
+		article.setPublishDate(new Date(2016, 6, 29, 21, 0, 0).getTime());
 		article.setSource("www.gsp.ro");
 		article.setUrl("http://www.gsp.ro/fotbal/liga-1/echipa-stelei-se-reintregeste-inaintea-celui-de-al-doilea-cantonament-482250.html");
 
-		Link selfRel = linkTo(methodOn(ArticleController.class).article(article.getUrl())).withSelfRel();
-		return new Resource<Article>(article, selfRel);
+		Link selfRel = linkTo(methodOn(ArticleController.class).article(article.getId())).withSelfRel();
+		return new Resource<>(article, selfRel);
 	}
 
 	private Resource<Article> article2() {
@@ -62,12 +64,12 @@ public class ArticleController {
 		article.setTitle("A dat Steaua lovitura? &quot;Este cel mai bun transfer pe care l-a făcut în ultimii ani. E cel mai bun mijlocaş din Liga 1!&quot;");
 		article.setDescription("Ilie Dumitrescu este de părere că transferul lui Adnan Aganovic este cea mai importantă mutare făcută de Steaua în această vară. Fostul mijlocaş al Viitorului este văzut perechea ideală pentru Pintilii la mijlocul terenului.");
 		article.setImagePath("http://storage0.dms.mpinteractiv.ro/media/401/581/7946/15512227/1/6358502-mediafax-foto-alexandru-hojda.jpg");
-		article.setPublishDate("29-06-2016-18-54-47");
+		article.setPublishDate(new Date(2016, 6, 28, 18, 54, 47).getTime());
 		article.setSource("www.prosport.ro");
 		article.setUrl("http://feedproxy.google.com/~r/prosport/zWZD/~3/2_XjrwYIaqk/a-dat-steaua-lovitura-este-cel-mai-bun-transfer-pe-care-l-a-facut-in-ultimii-ani-e-cel-mai-bun-mijlocas-din-liga-1-15512227");
 
-		Link selfRel = linkTo(methodOn(ArticleController.class).article(article.getUrl())).withSelfRel();
-		return new Resource<Article>(article, selfRel);
+		Link selfRel = linkTo(methodOn(ArticleController.class).article(article.getId())).withSelfRel();
+		return new Resource<>(article, selfRel);
 	}
 
 }
