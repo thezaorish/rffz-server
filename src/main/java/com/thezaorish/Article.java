@@ -1,6 +1,5 @@
 package com.thezaorish;
 
-
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
@@ -27,7 +26,6 @@ public class Article {
 	public UUID getId() {
 		return id;
 	}
-
 	public void setId(UUID id) {
 		this.id = id;
 	}
@@ -77,10 +75,11 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article{" +
-				"title='" + title + '\'' +
+				"id=" + id +
+				", title='" + title + '\'' +
 				", description='" + description + '\'' +
 				", source='" + source + '\'' +
-				", publishDate='" + publishDate + '\'' +
+				", publishDate=" + publishDate +
 				", imagePath='" + imagePath + '\'' +
 				", url='" + url + '\'' +
 				'}';

@@ -27,13 +27,17 @@ public class FeedSourceDaoTest {
 	@Test
 	public void shouldSaveFeedSource() {
 		// given
-		assertThat(jdbcTemplate.queryForObject("select count(*) from feed_source", Integer.class), is(0));
+		assertThat(numberOfSources(), is(0));
 
 		// when
 		feedSourceDao.save(new FeedSource("name", "url"));
 
 		// then
-		assertThat(jdbcTemplate.queryForObject("select count(*) from feed_source", Integer.class), is(1));
+		assertThat(numberOfSources(), is(1));
+	}
+
+	private Integer numberOfSources() {
+		return jdbcTemplate.queryForObject("select count(*) from feed_source", Integer.class);
 	}
 
 }
